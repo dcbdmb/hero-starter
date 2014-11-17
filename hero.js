@@ -54,6 +54,23 @@ var moves = {
     }
   },
 
+  // newman1
+  newman1: function(gameData, helpers) {
+    // Here, we ask if your hero's health is below 30
+    if (gameData.activeHero.health <= 30){
+      // If it is, head towards the nearest health well
+      return helpers.findNearestHealthWell(gameData);
+    } else {
+      // Otherwise, go attack someone...anyone.
+      return helpers.findNearestEnemy(gameData);
+    } else {
+      // Otherwise, go mine some diamonds!!!
+      return helpers.findNearestNonTeamDiamondMine(gameData);
+    }
+    }
+  },
+
+
   // Health Nut
   healthNut:  function(gameData, helpers) {
     // Here, we ask if your hero's health is below 75
@@ -137,9 +154,11 @@ var moves = {
     if (myHero.health < 40) {
       //Heal no matter what if low health
       return directionToHealthWell;
-    } else if (myHero.health < 100 && distanceToHealthWell === 1) {
+    } else if (myHero.health < 70 && distanceToHealthWell === 1) {
       //Heal if you aren't full health and are close to a health well already
       return directionToHealthWell;
+    } else if (myHero.health > 80) {
+      return helpers.findNearestEnemy(gameData);
     } else {
       //If healthy, go capture a diamond mine!
       return helpers.findNearestNonTeamDiamondMine(gameData);
@@ -181,7 +200,7 @@ var moves = {
  };
 
 //  Set our heros strategy
-var  move =  moves.aggressor;
+var  move =  moves.safeDiamondMiner;
 
 // Export the move function here
 module.exports = move;
