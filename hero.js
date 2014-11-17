@@ -61,12 +61,8 @@ var moves = {
       // If it is, head towards the nearest health well
       return helpers.findNearestHealthWell(gameData);
     } else {
-      // Otherwise, go attack someone...anyone.
-      return helpers.findNearestEnemy(gameData);
-    } else {
       // Otherwise, go mine some diamonds!!!
       return helpers.findNearestNonTeamDiamondMine(gameData);
-    }
     }
   },
 
@@ -151,14 +147,20 @@ var moves = {
     var distanceToHealthWell = healthWellStats.distance;
     var directionToHealthWell = healthWellStats.direction;
 
-    if (myHero.health < 40) {
-      //Heal no matter what if low health
-      return directionToHealthWell;
-    } else if (myHero.health < 70 && distanceToHealthWell === 1) {
+    if (myHero.health == 100) {
+      return helpers.findNearestEnemy(gameData);
+    //} else if (myHero.health = 80) {
+    //  return helpers.findNearestTeamMember(gameData);
+    //} else if (myHero.health < 60 && distanceToHealthWell === 2) {
+    } else if (myHero.health < 60) {
       //Heal if you aren't full health and are close to a health well already
       return directionToHealthWell;
-    } else if (myHero.health > 80) {
-      return helpers.findNearestEnemy(gameData);
+    } else if (myHero.health > 40) {
+      //If healthy, go capture a diamond mine!
+      return helpers.findNearestUnownedDiamondMine(gameData);
+    } else if (myHero.health < 40) {
+      //Heal no matter what if low health
+      return directionToHealthWell;
     } else {
       //If healthy, go capture a diamond mine!
       return helpers.findNearestNonTeamDiamondMine(gameData);
