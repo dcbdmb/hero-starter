@@ -3,6 +3,7 @@
   Strategies for the hero are contained within the "moves" object as
   name-value pairs, like so:
 
+
     //...
     ambusher : function(gamedData, helpers){
       // implementation of strategy.
