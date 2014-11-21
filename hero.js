@@ -189,7 +189,7 @@ var moves = {
       //Heal if you aren't full health and are close to a health well already
       return directionToHealthWell;
     } else {
-      //If healthy, go capture a diamond mine!
+      //If healthy, go capture a diamond mine! 
       return helpers.findNearestUnownedDiamondMine(gameData);
     }
   },
