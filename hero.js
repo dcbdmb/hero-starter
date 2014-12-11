@@ -94,35 +94,22 @@ var moves = {
 
     //now that I have stats, go
     //if health is greater than 60, find the nearest stuff and do it
-    if (myHero.health >= 60) {
-      if (distanceToStrongEnemy > distanceToHealthWell) {
-         if (distanceToWeakEnemy < distanceToDiamondMine) {
-            //console.log(">60 health and weak enemy:",distanceToStrongEnemy,distanceToWeakEnemy,distanceToDiamondMine,distanceToHealthWell,distanceToTeamMember);
-            return helpers.findNearestWeakerEnemy(gameData);
-            //return directionToWeakEnemy;
-            }
-         else if (distanceToDiamondMine < distanceToTeamMember) {
-            //console.log(">60 health and diamondmine:",distanceToStrongEnemy,distanceToWeakEnemy,distanceToDiamondMine,distanceToHealthWell,distanceToTeamMember,directionToDiamondMine);
-            return helpers.findNearestNonTeamDiamondMine(gameData);
-            //return directionToDiamondMine;
-            }
-         else {
-            //console.log(">60 health and team member:",distanceToStrongEnemy,distanceToWeakEnemy,distanceToDiamondMine,distanceToHealthWell,distanceToTeamMember);
-            return helpers.findNearestTeamMember(gameData);
-            //return directionToTeamMember;
-            }
+    if (myHero.health >= 80) {
+      return helpers.findNearestEnemy(gameData);
+      }
+    else if (myHero.health >= 60 && myHero.health < 80) {
+      if (distanceToWeakEnemy < distanceToDiamondMine) {
+         return helpers.findNearestWeakerEnemy(gameData);
          }
       else {
-         //if you find yoursef closer to a strong enemy than a health well, start moving
-         //console.log("<60 health and close to strong:",distanceToStrongEnemy,distanceToWeakEnemy,distanceToDiamondMine,distanceToHealthWell,distanceToTeamMember);
-         return helpers.findNearestHealthWell(gameData);
-         //return directionToHealthWell;
+         return helpers.findNearestNonTeamDiamondMine(gameData);
          }
       }
+    else if (myHero.health >= 40 && myHero.health < 60) {
+      return helpers.findNearestUnownedDiamondMine(gameData);
+      }
     else {
-      //console.log("<60 health:",distanceToStrongEnemy,distanceToWeakEnemy,distanceToDiamondMine,distanceToHealthWell);
       return helpers.findNearestHealthWell(gameData);
-      //return directionToHealthWell;
       }
     }
  };
